@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Калькулятор покупки прайма CS2</title>
+  <link rel="stylesheet" href="prime-calculator.css" />
+</head>
+<body>
+ <div id="blinks-container"></div>
+
+  <div class="container">
+    <h1>Калькулятор покупки прайма CS2</h1>
+
+
+
+
+
+
+
+    <!-- Кнопки для добавления данных -->
+    <div class="buttons">
+      <button id="add-account-btn">➕ Добавить аккаунт</button>
+      <button id="add-case-btn">🎁 Добавить кейс</button>
+      <button id="add-skin-btn">🎯 Добавить скин</button>
+    </div>
+
+    <!-- Списки добавленных данных -->
+    <section id="data-section">
+      <h2>Добавленные данные</h2>
+      <div id="accounts-list"></div>
+      <div id="cases-list"></div>
+      <div id="skins-list"></div>
+    </section>
+
+    <!-- Настройки -->
+    <section id="settings-section">
+      <h2>Настройки</h2>
+      <label for="prime-price">Стоимость прайма (грн):</label>
+      <input type="number" id="prime-price" value="600" required />
+      <label for="reserve">Запас на аккаунте (грн):</label>
+      <input type="number" id="reserve" value="50" />
+      <label for="market-fee">Комиссия площадки (%):</label>
+      <input type="number" id="market-fee" value="13" />
+    </section>
+
+    <!-- Кнопка распределения -->
+    <button id="distribute-btn">📊 Распределить</button>
+
+    <!-- Результаты -->
+    <section id="results-section">
+      <h2>Результаты</h2>
+      <div id="results"></div>
+    </section>
+  </div>
+
+  <!-- Модальные окна -->
+  <!-- Модальное окно для добавления аккаунта -->
+  <div id="account-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="close-account-modal">&times;</span>
+      <h2>Добавить аккаунт</h2>
+      <form id="account-form">
+        <label for="account-nickname">Никнейм:</label>
+        <input type="text" id="account-nickname" required />
+        <label for="account-balance">Баланс (грн):</label>
+        <input type="number" id="account-balance" required />
+        <button type="submit">Добавить</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Модальное окно для добавления кейса -->
+  <div id="case-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="close-case-modal">&times;</span>
+      <h2>Добавить кейс</h2>
+      <form id="case-form">
+        <label for="case-name">Название кейса:</label>
+        <select id="case-name" required>
+
+       <!--   <option value="">Выберите кейс</option>
+          <option value="cs20">Кейс CS20</option>
+          <option value="esports_2013">Кейс киберспорта 2013</option>
+          <option value="esports_2013_winter">Кейс киберспорта зима 2013</option>
+          <option value="esports_2014_summer">Кейс киберспорта лето 2014</option>
+          <option value="gamma">Кейс Гамма</option>
+          <option value="gamma_2">Кейс Гамма 2</option>
+          <option value="glove">Кейс перчаток</option>
+          <option value="horizon">Кейс Горизонт</option>
+          <option value="winter_offensive_weapon">Кейс Зимняя Операция оружие</option>
+          <option value="dreams_nightmare">Грёзы и кошмары</option>
+          <option value="recoil">Гремучий кейс</option>
+          <option value="huntsman_weapon">Кейс Охотник оружие</option>
+          <option value="csgo_weapon">Оружейный кейс Тираж #1 CS:GO</option>
+          <option option value="csgo_weapon_2">Оружейный кейс CS:GO, тираж #2</option>
+          <option value="csgo_weapon_3">Оружейный кейс CS:GO Тираж #3</option>
+          <option value="operation_bravo">Операция Браво</option>
+          <option value="operation_hydra">Операция Гидра кейс</option>
+          <option value="operation_vanguard_weapon">Операция Авангард оружейный кейс</option>
+          <option value="operation_wildfire">Операция Лесной пожар кейс</option>
+          <option value="operation_phoenix_weapon">Операция Феникс оружие кейс</option>
+          <option value="operation_breakout_weapon">Операция Побег оружейный кейс</option>
+          <option value="revolver">Кейс Револьвер</option>
+          <option value="revolution">Революция</option>
+          <option value="fracture">Разлом</option>
+          <option value="shadow">Тёмный кейс</option>
+          <option value="spectrum">Кейс Спектр</option>
+          <option value="spectrum_2">Кейс Спектр 2</option>
+          <option value="chroma">Кейс Хрома</option>
+          <option value="chroma_2">Кейс Хрома 2</option>
+          <option value="chroma_3">Кейс Хрома 3</option>
+          <option value="falchion">Кейс Фальшион</option>
+        --> 
+                  <option value="">Выберите кейс</option>
+<option value="Кейс CS20">Кейс CS20</option>
+<option value="Кейс киберспорта 2013">Кейс киберспорта 2013</option>
+<option value="Кейс киберспорта зима 2013">Кейс киберспорта зима 2013</option>
+<option value="Кейс киберспорта лето 2014">Кейс киберспорта лето 2014</option>
+<option value="Кейс Гамма">Кейс Гамма</option>
+<option value="Кейс Гамма 2">Кейс Гамма 2</option>
+<option value="Кейс перчаток">Кейс перчаток</option>
+<option value="Кейс Горизонт">Кейс Горизонт</option>
+<option value="Кейс Зимняя Операция оружие">Кейс Зимняя Операция оружие</option>
+<option value="Грёзы и кошмары">Грёзы и кошмары</option>
+<option value="Гремучий кейс">Гремучий кейс</option>
+<option value="Кейс Охотник оружие">Кейс Охотник оружие</option>
+<option value="Оружейный кейс Тираж #1 CS:GO">Оружейный кейс Тираж #1 CS:GO</option>
+<option value="Оружейный кейс CS:GO, тираж #2">Оружейный кейс CS:GO, тираж #2</option>
+<option value="Оружейный кейс CS:GO Тираж #3">Оружейный кейс CS:GO Тираж #3</option>
+<option value="Операция Браво">Операция Браво</option>
+<option value="Операция Гидра кейс">Операция Гидра кейс</option>
+<option value="Операция Авангард оружейный кейс">Операция Авангард оружейный кейс</option>
+<option value="Операция Лесной пожар кейс">Операция Лесной пожар кейс</option>
+<option value="Операция Феникс оружие кейс">Операция Феникс оружие кейс</option>
+<option value="Операция Побег оружейный кейс">Операция Побег оружейный кейс</option>
+<option value="Кейс Револьвер">Кейс Револьвер</option>
+<option value="Революция">Революция</option>
+<option value="Разлом">Разлом</option>
+<option value="Тёмный кейс">Тёмный кейс</option>
+<option value="Кейс Спектр">Кейс Спектр</option>
+<option value="Кейс Спектр 2">Кейс Спектр 2</option>
+<option value="Кейс Хрома">Кейс Хрома</option>
+<option value="Кейс Хрома 2">Кейс Хрома 2</option>
+<option value="Кейс Хрома 3">Кейс Хрома 3</option>
+<option value="Кейс Фальшион">Кейс Фальшион</option>
+
+
+
+
+
+          <!-- Добавьте другие кейсы по необходимости -->
+        </select>
+        <label for="case-quantity">Количество:</label>
+        <input type="number" id="case-quantity" required />
+        <label for="case-price">Цена за штуку (грн):</label>
+        <input type="number" id="case-price" required />
+        <button type="submit">Добавить</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Модальное окно для добавления скина -->
+  <div id="skin-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="close-skin-modal">&times;</span>
+      <h2>Добавить скин</h2>
+      <form id="skin-form">
+        <label for="skin-name">Название скина:</label>
+        <input type="text" id="skin-name" required />
+        <label for="skin-quantity">Количество:</label>
+        <input type="number" id="skin-quantity" required />
+        <label for="skin-price">Цена за штуку (грн):</label>
+        <input type="number" id="skin-price" required />
+        <button type="submit">Добавить</button>
+      </form>
+    </div>
+  </div>
+
+
+<!-- БОКОВОЕ МЕНЮ -->
+<div class="sidebar">
+  <ul class="sidebar-menu">
+    <li><a href="Mainpagemenu.html" title="Главная">
+      <svg viewBox="0 0 24 24"><path d="M3 12l9-9 9 9v9a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3z"/></svg>
+      <span>Главная</span>
+    </a></li>
+    <li><a href="profile.html" title="Профиль">
+      <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zM4 20v-1a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v1"/></svg>
+      <span>Профиль</span>
+    </a></li>
+    <li><a href="#" id="open-cursor-menu" title="Курсоры">
+      <svg viewBox="0 0 24 24"><path d="M3 2l6 20 3-7 7 3z"/></svg>
+      <span>Курсоры</span>
+    </a></li>
+  </ul>
+</div>
+
+<!-- МОДАЛЬНОЕ ОКНО КУРСОРОВ -->
+<!-- МОДАЛЬНОЕ ОКНО С ВКЛАДКАМИ -->
+<!-- МОДАЛЬНОЕ ОКНО С ВКЛАДКАМИ -->
+<div class="cursor-modal" id="cursor-modal">
+  <div class="cursor-modal-content">
+    
+    <button class="close-modal" id="close-cursor-modal">&times;</button>
+
+    <!-- Заголовок и поиск -->
+    <div class="cursor-modal-header">
+      <h2>Выберите курсор</h2>
+
+      <!-- 🔁 НЕОНОВАЯ ОБЁРТКА ДЛЯ ПОИСКА -->
+      <div id="poda">
+        <div class="glow"></div>
+        <div class="darkBorderBg"></div>
+        <div class="darkBorderBg"></div>
+        <div class="darkBorderBg"></div>
+        <div class="white"></div>
+        <div class="border"></div>
+        <div id="main">
+          <input
+            placeholder="Поиск курсора..."
+            type="text"
+            name="text"
+            class="input"
+            id="cursor-search"
+          />
+          <div id="input-mask"></div>
+          <div id="pink-mask"></div>
+          <div class="filterBorder"></div>
+          <div id="filter-icon">
+            <svg preserveAspectRatio="none" height="27" width="27" viewBox="4.8 4.56 14.832 15.408" fill="none">
+              <path d="M8.16 6.65002H15.83C16.47 6.65002 16.99 7.17002 16.99 7.81002V9.09002C16.99 9.56002 16.7 10.14 16.41 10.43L13.91 12.64C13.56 12.93 13.33 13.51 13.33 13.98V16.48C13.33 16.83 13.1 17.29 12.81 17.47L12 17.98C11.24 18.45 10.2 17.92 10.2 16.99V13.91C10.2 13.5 9.97 12.98 9.73 12.69L7.52 10.36C7.23 10.08 7 9.55002 7 9.20002V7.87002C7 7.17002 7.52 6.65002 8.16 6.65002Z"
+              stroke="#d6d6e6" stroke-width="1" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </div>
+          <div id="search-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" height="24" fill="none" class="feather feather-search">
+              <circle stroke="url(#search)" r="8" cy="11" cx="11"></circle>
+              <line stroke="url(#searchl)" y2="16.65" y1="22" x2="16.65" x1="22"></line>
+              <defs>
+                <linearGradient gradientTransform="rotate(50)" id="search">
+                  <stop stop-color="#f8e7f8" offset="0%"></stop>
+                  <stop stop-color="#b6a9b7" offset="50%"></stop>
+                </linearGradient>
+                <linearGradient id="searchl">
+                  <stop stop-color="#b6a9b7" offset="0%"></stop>
+                  <stop stop-color="#837484" offset="50%"></stop>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Вкладки -->
+   <div class="tab-buttons">
+  <button class="tab active" data-tab="cursor"><span>Cursor</span></button>
+  <button class="tab" data-tab="pointer"><span>Pointer</span></button>
+</div>
+
+    <!-- Cursor вкладка -->
+    <div class="tab-content tab-cursor active">
+      <div class="cursor-options" data-type="cursor">
+        <div class="cursor-option selected">
+          <img src="cursor/default.png" alt="Default Cursor">
+          <p>Default</p>
+        </div>
+        <div class="cursor-option">
+          <img src="cursor/fancy1.png" alt="Default Cursor">
+          <p>Fancy Cursor</p>
+        </div>
+        <div class="cursor-option">
+          <img src="cursor/fancy2.png" alt="Default Cursor">
+          <p>Stealth Cursor</p>
+        </div>
+        <div class="cursor-option">
+          <img src="cursor/fancy3.png" alt="Default Cursor">
+          <p>Ghost Cursor</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pointer вкладка -->
+    <div class="tab-content tab-pointer">
+      <div class="cursor-options" data-type="pointer">
+        <div class="cursor-option selected">
+          <img src="pointer/default-pointer.png" alt="Default Pointer">
+          <p>Default</p>
+        </div>
+        <div class="cursor-option">
+          <img src="pointer/Pointer1.png" alt="Default Cursor">
+          <p>Green Click</p>
+        </div>
+        <div class="cursor-option">
+          <img src="pointer/Pointer2.png" alt="Default Cursor">
+          <p>Sharp Hand</p>
+        </div>
+        <div class="cursor-option">
+          <img src="pointer/Pointer3.png" alt="Default Cursor">
+          <p>Shadow Click</p>
+        </div>
+      </div>
+    </div>
+
+    <button class="confirm-cursor">Подтвердить</button>
+
+    <!-- 🔥 Контейнер для анимации частиц пламени -->
+    <div class="cursor-particles-container" id="cursor-particles"></div>
+
+
+
+
+  <script src="prime-calculator.js"></script>
+</body>
+</html>
